@@ -811,7 +811,7 @@ local Original_RandomFoodChoice = Food.RandomFoodChoice
 Food.RandomFoodChoice = function(customerOwnerUID, customerOwnerID, isRichCustomer, isPirateCustomer, isNearTree)
     if GoldFood then
 		local spoof = Food.new("45", customerOwnerUID, customerOwnerID, true, true)
-		spoof.IsGold = true
+		spoof.IsHyper = true
 		return spoof
 	end
 	
@@ -880,7 +880,7 @@ Waiter.CheckForFoodDelivery = function(waiter)
 			end
 			
 			local selectedFoodOrder = orderStand.stateData.foodReadyList[1]
-			selectedFoodOrder.isGold = true
+			selectedFoodOrder.isHyper = true
 			
 			table.remove(orderStand.stateData.foodReadyList, 1)
 
@@ -892,7 +892,7 @@ Waiter.CheckForFoodDelivery = function(waiter)
 				return false
 			end
 			waiter:FaceEntity(orderStand)
-			waiter:HoldFood(selectedFoodOrder.ID, selectedFoodOrder.isGold)
+			waiter:HoldFood(selectedFoodOrder.ID, selectedFoodOrder.isHyper)
 			waiter.state = "WalkingToDeliverFood"
 			if not customerOfOrder.isDeleted then
 				waiter:WalkToNewFloor(customerOfOrder:GetMyFloor(), function()
